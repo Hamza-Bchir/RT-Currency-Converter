@@ -16,7 +16,7 @@ function get_exchange_rates() {
         exchange_rate=$(curl -s "$api_url" | jq -r ".rates[\"$target_currency\"]")
         echo $exchange_rate
 }
-http://data.fixer.io/api/latest?access_key=b2797e7193dcda148c061f5118343a89&base=USD | jq -r ".rates[\"TND\"]
+
 function get_exchange_rates_2()
 {
 	base_currency=$1
