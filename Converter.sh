@@ -36,10 +36,30 @@ function base_changer(){
 }
 
 
-echo "Veuillez choisir la devise de départ"
-read currency_depart
-echo "Veuillez choisir la devise d'arrivée"
-read currency_darriv
+# Traitement des options de ligne de commande
+while getopts ":s:t:" opt; do
+    case $opt in
+        s)  # Spécifier la devise de départ
+            currency_depart="$OPTARG"
+            ;;
+        t)  # Spécifier la devise d'arrivée
+            currency_darriv="$OPTARG"
+            ;;
+        \?)
+            echo "Option invalide: -$OPTARG" >&2
+            exit 1
+            ;;
+    esac
+done
+
+#Vérification des arguments de ligne de commande
+
+if [ -z "$currency_depart" ] || [ -z "$currency_darriv" ]; then
+	echo "Usage: $0 -s currency_depart -t currency_darriv"
+	exit 1
+fi
+
+
 #Structure conditionnel permet de choisis les fonctions selon le choix de la base
 if [ "$currency_depart" != "EUR" ]; then
 	rate="$(base_changer "$currency_depart" "$currency_darriv")"
