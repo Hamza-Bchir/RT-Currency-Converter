@@ -6,7 +6,7 @@ API_KEY='b2797e7193dcda148c061f5118343a89'
 base_url='http://data.fixer.io/api/'
 endpoint='latest'
 
-
+#Fonction qui permet de calculer le taux d\'une paire de devises dont la base est l\'euro
 function get_exchange_rate() {
 	local base_currency=$1
 	local target_currency=$2
@@ -15,6 +15,7 @@ function get_exchange_rate() {
 	echo $exchange_rate
 }
 
+#Fonction qui permet d\'afficher la paire de devises choisies ainsi que le taux
 function display_rate() {
 	local currency_depart=$1
 	local currency_darriv=$2
@@ -23,7 +24,7 @@ function display_rate() {
 }
 
 
-
+#Fonction qui permet de calculer le taux d\'une paire de devises dont la base n\'est pas l\'Euro
 function base_changer(){
 	local base_currency=$1
 	local target_currency=$2
@@ -39,6 +40,7 @@ echo "Veuillez choisir la devise de départ"
 read currency_depart
 echo "Veuillez choisir la devise d'arrivée"
 read currency_darriv
+#Structure conditionnel permet de choisis les fonctions selon le choix de la base
 if [ "$currency_depart" != "EUR" ]; then
 	rate="$(base_changer "$currency_depart" "$currency_darriv")"
 	display_rate "$currency_depart" "$currency_darriv" "$rate"
