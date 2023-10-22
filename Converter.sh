@@ -21,6 +21,7 @@ function display_rate() {
 	local currency_darriv=$2
 	local rate=$3
 	echo "Le taux de change de $currency_depart vers $currency_darriv est de $rate"
+	date
 }
 
 
@@ -37,9 +38,9 @@ function base_changer(){
 
 
 # Traitement des options de ligne de commande
-while getopts ":s:t:" opt; do
+while getopts ":b:t:" opt; do
     case $opt in
-        s)  # Spécifier la devise de départ
+        b)  # Spécifier la devise de départ
             currency_depart="$OPTARG"
             ;;
         t)  # Spécifier la devise d'arrivée
@@ -55,7 +56,7 @@ done
 #Vérification des arguments de ligne de commande
 
 if [ -z "$currency_depart" ] || [ -z "$currency_darriv" ]; then
-	echo "Usage: $0 -s currency_depart -t currency_darriv"
+	echo "Usage: $0 -b base_currency -t target_currency"
 	exit 1
 fi
 
